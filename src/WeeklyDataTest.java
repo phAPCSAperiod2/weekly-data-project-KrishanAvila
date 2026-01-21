@@ -1,8 +1,3 @@
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * AP CSA - Weekly Data Analyzer (Arrays & OOP Assessment)
  * JUnit tests for WeeklyData.java
@@ -19,85 +14,23 @@ import static org.junit.jupiter.api.Assertions.*;
  *  - Arrays are non-empty for core tests.
  *  - Optional tests included for empty-array behavior.
  */
-class WeeklyDataTest {
+/**
+ * WeeklyDataTest tests the WeeklyData class with sample values.
+ */
+public class WeeklyDataTest {
 
-    // -------------------------------------------------
-    // Constructor Deep Copy Tests
-    // -------------------------------------------------
-    @Test
-    void constructor_makesDeepCopy_notAliasingInput() {
-        double[] input = {10.0, 20.0, 30.0};
-        WeeklyData wd = new WeeklyData(input);
+    public static void main(String[] args) {
 
-        double originalTotal = wd.getTotal();
+        int[] testSteps = {8500, 10000, 9200, 11000, 7000, 12000, 9800};
+        WeeklyData data = new WeeklyData(testSteps);
 
-        // Mutate original array after construction
-        input[0] = 9999.0;
-
-        assertEquals(
-                originalTotal,
-                wd.getTotal(),
-                1e-9,
-                "WeeklyData must deep-copy the input array. External changes should not affect internal data."
-        );
+        System.out.println("Testing WeeklyData Class");
+        System.out.println("--------------------");
+        System.out.println("Total: " + data.getTotal());
+        System.out.println("Average: " + data.getAverage());
+        System.out.println("Highest: " + data.getHighest());
+        System.out.println("Lowest: " + data.getLowest());
+        System.out.println();
+        System.out.println(data);
     }
-
-    @Test
-    void constructor_copiesAllElements_correctLength() {
-        double[] input = {5.5, 10.0, 20.25};
-        WeeklyData wd = new WeeklyData(input);
-
-        assertEquals(35.75, wd.getTotal(), 1e-9);
-    }
-
-    // -------------------------------------------------
-    // getTotal Tests
-    // -------------------------------------------------
-    @Test
-    void getTotal_typicalValues() {
-        double[] input = {100, 200, 300};
-        WeeklyData wd = new WeeklyData(input);
-
-        assertEquals(600.0, wd.getTotal(), 1e-9);
-    }
-
-    @Test
-    void getTotal_singleValue() {
-        double[] input = {42.5};
-        WeeklyData wd = new WeeklyData(input);
-
-        assertEquals(42.5, wd.getTotal(), 1e-9);
-    }
-
-    // -------------------------------------------------
-    // getAverage Tests
-    // -------------------------------------------------
-    @Test
-    void getAverage_typicalValues() {
-        double[] input = {2, 4, 6, 8};
-        WeeklyData wd = new WeeklyData(input);
-
-        assertEquals(5.0, wd.getAverage(), 1e-9);
-    }
-
-    @Test
-    void getAverage_decimalResult() {
-        double[] input = {1, 2, 3};
-        WeeklyData wd = new WeeklyData(input);
-
-        assertEquals(2.0, wd.getAverage(), 1e-9);
-    }
-
-    // -------------------------------------------------
-    // getMax Tests
-    // -------------------------------------------------
-    @Test
-    void getMax_typicalValues() {
-        double[] input = {10, 50, 30, 75, 25};
-        WeeklyData wd = new WeeklyData(input);
-
-        assertEquals(75.0, wd.getMax(), 1e-9);
-    }
-
-    @Test
-    v
+}

@@ -1,76 +1,62 @@
 import java.util.Scanner;
 
-/**
- * Instructions:
- * - Complete the WeeklyData.java class first.
- * - Use this App class to collect user input and test your WeeklyData methods.
- * - Follow all TODOs carefully.
- * - Do NOT hard-code values — use loops and method calls.
- */
 public class App {
 
     public static void main(String[] args) {
 
-        // -------------------------------------------------------------
-        // TODO 1: Create a Scanner for user input
-        // -------------------------------------------------------------
+        Scanner input = new Scanner(System.in);
+        int[] weeklySteps = new int[7];
+        final int DAILY_GOAL = 10000;
 
+        System.out.println("Weekly Step Analyzer");
+        System.out.println("--------------------");
 
-        // -------------------------------------------------------------
-        // TODO 2: Give information about your program
-        //         Ask the user about their goals (if applicable)
-        // -------------------------------------------------------------
+        // Input with validation
+        for (int i = 0; i < weeklySteps.length; i++) {
+            System.out.print("Enter the number of steps for Day " + (i + 1) + ": ");
 
+            while (!input.hasNextInt()) {
+                System.out.print("Invalid input. Enter a whole number: ");
+                input.next();
+            }
 
-        // -------------------------------------------------------------
-        // TODO 3: Create an array to hold 7 days of data
-        //         Use an appropriate data type (int or double)
-        //         Name the array weekData
-        // -------------------------------------------------------------
+            int steps = input.nextInt();
 
+            while (steps < 0) {
+                System.out.print("Steps cannot be negative. Try again: ");
+                steps = input.nextInt();
+            }
 
-        // -------------------------------------------------------------
-        // TODO 4: Use a for loop to collect data for each day of the week
-        //         Prompt example:
-        //         "Enter <data type> for day X: "
-        //
-        //         Include input validation:
-        //         - Use a while loop to prevent negative values
-        //         - Re-prompt if the value is invalid
-        // -------------------------------------------------------------
+            weeklySteps[i] = steps;
+        }
 
+        WeeklyData data = new WeeklyData(weeklySteps);
 
-        // -------------------------------------------------------------
-        // TODO 5: Create a WeeklyData object
-        //         Pass the weekData array into the constructor
-        // -------------------------------------------------------------
+        // Output
+        System.out.println("\nWeekly Summary");
+        System.out.println("--------------------");
+        System.out.println("Total Steps: " + data.getTotal());
+        System.out.printf("Average Steps Per Day: %.2f\n", data.getAverage());
+        System.out.println("Highest Day: " + data.getHighest());
+        System.out.println("Lowest Day: " + data.getLowest());
 
+        System.out.println();
+        System.out.println(data);
 
-        // -------------------------------------------------------------
-        // TODO 6: Display the results of the analysis
-        //         Call methods from WeeklyData to display:
-        //         - Total
-        //         - Average
-        //         - Minimum
-        //         - Maximum
-        //
-        //         Use clear labels and formatted output if needed
-        // -------------------------------------------------------------
+        // Daily feedback
+        System.out.println("Daily Goal Feedback (Goal: 10,000 steps)");
+        System.out.println("--------------------");
+        for (int i = 0; i < 7; i++) {
+            System.out.println("Day " + (i + 1) + ": " + data.getDailyMessage(i, DAILY_GOAL));
+        }
 
+        // Weekly insight
+        if (data.getAverage() >= DAILY_GOAL) {
+            System.out.println("\nAmazing! You met your step goal on average this week!");
+        } else {
+            System.out.println("\nGood effort! Try adding a short walk each day next week.");
+        }
 
-        // -------------------------------------------------------------
-        // TODO 7: Display the full week of data
-        //         Use the toString() method from WeeklyData
-        // -------------------------------------------------------------
-
-
-        // -------------------------------------------------------------
-        // TODO 8: Give the user insights about their week
-        //         --> "You need to drink more water next week!"
-        //         --> "You were very hydrated this week!"
-        //         --> etc.
-        // -------------------------------------------------------------
-
-
+        input.close();
     }
 }
