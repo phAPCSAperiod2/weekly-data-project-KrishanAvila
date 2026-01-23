@@ -4,7 +4,7 @@ import java.util.Scanner;
  * The App class serves as the main entry point for the Weekly Step Analyzer application.
  * It collects daily step counts from the user, validates the input, and displays a comprehensive
  * weekly summary including total steps, average, highest and lowest days, and personalized feedback
- * based on a daily goal of 10,000 steps.
+ * based on a user-defined daily goal.
  *
  * @author Krishan Avila
  * @version 1.0
@@ -23,10 +23,22 @@ public class App {
 
         Scanner input = new Scanner(System.in);
         int[] weeklySteps = new int[7];
-        final int DAILY_GOAL = 10000;
 
         System.out.println("Weekly Step Analyzer");
         System.out.println("--------------------");
+        
+        // Get user's daily goal
+        System.out.print("Enter your daily step goal: ");
+        while (!input.hasNextInt()) {
+            System.out.print("Invalid input. Enter a whole number: ");
+            input.next();
+        }
+        int DAILY_GOAL = input.nextInt();
+        
+        while (DAILY_GOAL < 0) {
+            System.out.print("Goal cannot be negative. Try again: ");
+            DAILY_GOAL = input.nextInt();
+        }
 
         // Input with validation
         for (int i = 0; i < weeklySteps.length; i++) {
@@ -61,7 +73,7 @@ public class App {
         System.out.println(data);
 
         // Daily feedback
-        System.out.println("Daily Goal Feedback (Goal: 10,000 steps)");
+        System.out.println("Daily Goal Feedback (Goal: " + DAILY_GOAL + " steps)");
         System.out.println("--------------------");
         for (int i = 0; i < 7; i++) {
             System.out.println("Day " + (i + 1) + ": " + data.getDailyMessage(i, DAILY_GOAL));
