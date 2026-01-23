@@ -1,7 +1,24 @@
 import java.util.Scanner;
 
+/**
+ * The App class serves as the main entry point for the Weekly Step Analyzer application.
+ * It collects daily step counts from the user, validates the input, and displays a comprehensive
+ * weekly summary including total steps, average, highest and lowest days, and personalized feedback
+ * based on a daily goal of 10,000 steps.
+ *
+ * @author Krishan Avila
+ * @version 1.0
+ */
 public class App {
 
+    /**
+     * The main method is the entry point of the application.
+     * It prompts the user to enter step counts for each day of the week,
+     * validates the input, creates a WeeklyData object to analyze the data,
+     * and displays a detailed weekly summary with personalized feedback.
+     *
+     * @param args Command-line arguments (not used in this application)
+     */
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
